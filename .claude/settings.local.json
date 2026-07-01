@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(run)",
+      "Skill(run:*)",
+      "PowerShell(cd \"c:\\\\Users\\\\jsinghal\\\\OneDrive - Eastside Preparatory School\\\\AirportDataVisualization\"; python -m http.server 8000 2>&1 &)",
+      "Bash(curl -s http://localhost:8000/index.html)",
+      "PowerShell(Stop-Job -Id 1)",
+      "PowerShell(Get-Job)",
+      "PowerShell(Stop-Job)"
+    ]
+  }
+}

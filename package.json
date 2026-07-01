@@ -1,0 +1,16 @@
+{
+  "name": "airport-data-visualization",
+  "version": "1.0.0",
+  "description": "Live flight tracking visualization using adsb.lol data",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.x"
+  },
+  "keywords": ["flight-tracking", "visualization", "adsb"],
+  "author": "Jayesh Singhal",
+  "license": "MIT"
+}
