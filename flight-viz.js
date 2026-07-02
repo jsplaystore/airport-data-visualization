@@ -178,7 +178,7 @@ async function fetchAircraft() {
         if (!Array.isArray(data)) return;
 
         // Planes near SEA/ATL get classified (colors, route lines, counts);
-        // everything else shows as neutral world traffic
+        // everything else shows as neutral worldwide traffic
         const NEAR = 6;
         const dist = (ac, ap) => Math.hypot(ac.latitude - ap.lat, ac.longitude - ap.lon);
 
@@ -188,11 +188,13 @@ async function fetchAircraft() {
             if (dist(ac, AIRPORTS.SEA) < NEAR || dist(ac, AIRPORTS.ATL) < NEAR) {
                 aircraft.push({ ...ac, ...classify(ac) });
             } else {
-                worldTraffic.push({ lat: ac.latitude, lng: ac.longitude });
+                // Show all worldwide traffic as plane icons too, not just dots
+                aircraft.push({ ...ac, mode: null, airport: null });
             }
         });
-        world.pointsData(worldTraffic);
+        world.pointsData([]);
 
+        const nearSeaAtl = aircraft.filter(ac => ac.airport).length;
         const toSEA = aircraft.filter(ac => ac.mode === 'arriving' && ac.airport === 'SEA').length;
         const toATL = aircraft.filter(ac => ac.mode === 'arriving' && ac.airport === 'ATL').length;
         const fromSEA = aircraft.filter(ac => ac.mode === 'departing' && ac.airport === 'SEA').length;
@@ -207,8 +209,8 @@ async function fetchAircraft() {
         document.getElementById('toAtlCount').textContent = toATL;
         document.getElementById('fromSeaCount').textContent = fromSEA;
         document.getElementById('fromAtlCount').textContent = fromATL;
-        document.getElementById('flightCount').textContent = aircraft.length;
-        document.getElementById('worldCount').textContent = worldTraffic.length;
+        document.getElementById('flightCount').textContent = nearSeaAtl;
+        document.getElementById('worldCount').textContent = aircraft.length;
         document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
     } catch (err) {
         console.error('Aircraft fetch error:', err);
