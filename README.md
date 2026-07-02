@@ -183,9 +183,6 @@ This project uses the free adsb.lol API:
 
 MIT License - see LICENSE file for details
 
-## Author
-
-Jayesh Singhal
 
 ## Acknowledgments
 
